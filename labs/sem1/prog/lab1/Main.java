@@ -15,20 +15,7 @@ public class Main {
     public static void beautifulOutput(double[][] z) {
         for (double[] j : z) {
             for (double i : j) {
-                String s = String.format("%.3f", i);
-                while (s.length() < 11) {
-                    s = " " + s;
-                }
-                System.out.print(s + " ");
-            }
-            System.out.print('\n');
-        }
-    }
-
-    public static void defaultOutput(double[][] z) {
-        for (double[] j : z) {
-            for (double i : j) {
-                System.out.printf("%.3f ", i);
+                System.out.printf("%11.3f", i);
             }
             System.out.print('\n');
         }
@@ -65,6 +52,5 @@ public class Main {
         }
         // Вывод
         beautifulOutput(z);
-        // defaultOutput(z);
     }
 }
