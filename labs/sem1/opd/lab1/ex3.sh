@@ -14,4 +14,4 @@ chmod 400 togetic0
 cp -f togetic0 pansage6/aipom
 chmod 004 togetic0
 ln -sf noctowl6 metagross6/kricketunenoctowl
-cd - >/dev/null
+cd ..

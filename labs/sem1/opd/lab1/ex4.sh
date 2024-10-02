@@ -15,4 +15,4 @@ ls -lrRS | grep -ve "/" -ve "итог" -ve "^$" -ve ":$" | sort -gk 5 | tail -n 
 echo -e '\n========4.6========\n'
 cat *6 2>tmp | sort
 echo
-cd - >/dev/null 
+cd ..

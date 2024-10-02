@@ -11,7 +11,7 @@ chmod 066 kricketune
 chmod u-rwx armaldo
 chmod g-rwx armaldo
 chmod u+rw-x armaldo
-cd - >/dev/null
+cd ..
 chmod 660 noctowl6
 chmod 737 pansage6
 cd pansage6
@@ -20,7 +20,7 @@ chmod 737 haxorus
 chmod 512 purrloin
 chmod 755 aipom
 chmod 752 lilligant
-cd - >/dev/null
+cd ..
 chmod u+rwx shelgon9
 chmod g-r+wx shelgon9
 chmod o+rwx shelgon9
@@ -28,5 +28,6 @@ cd shelgon9
 chmod 551 charizard
 chmod 500 hoothoot
 chmod 044 munchlax
-cd - >/dev/null
+cd ..
 chmod 004 togetic0
+cd ..

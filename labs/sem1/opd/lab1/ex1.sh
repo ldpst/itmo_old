@@ -12,7 +12,7 @@ touch kricketune
 echo -e 'Возможности Overland=8 Surface=3 Sky=5 Jamp=3\nPower2=0 Intelligence=4' > kricketune
 touch armaldo
 echo -e 'Способности Mountain Peak Swarm\nBattle Armor Rock Head' > armaldo
-cd - >/dev/null
+cd ..
 touch noctowl6
 echo -e 'Развитые способности Tinted\nLens' > noctowl6
 mkdir pansage6
@@ -23,13 +23,14 @@ mkdir haxorus
 mkdir purrloin
 mkdir aipom
 mkdir lilligant
-cd - >/dev/null
+cd ..
 mkdir shelgon9
 cd shelgon9
 mkdir charizard
 mkdir hoothoot
 touch munchlax
 echo Развитые способности Gluttony > munchlax
-cd - >/dev/null
+cd ..
 touch togetic0
 echo -e 'Живет\nForest Rainforest' > togetic0
+cd ..
