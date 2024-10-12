@@ -1,0 +1,60 @@
+@startuml
+object Pokemon
+Pokemon : ru.ifmo.se.pokemon
+
+object Latias
+object Sandyghast
+object Palossand
+object Pichu
+object Pikachu
+object Raichu
+
+object Move
+Move : ru.ifmo.se.pokemon
+object DamageMove
+object StatusMove
+object PhysicalMove
+object SpecialMove
+
+object Bulldoze
+object WildCharge
+object ZenHeadbutt
+
+object Agility
+object Confide
+object DoubleTeam
+object HealPulse 
+
+object Absorb
+object MegaDrain
+object MistBall
+object SludgeBomb
+object Thunder
+
+PhysicalMove <|-- Bulldoze
+PhysicalMove <|-- WildCharge
+PhysicalMove <|-- ZenHeadbutt
+
+SpecialMove <|-- Absorb
+SpecialMove <|-- MegaDrain
+SpecialMove <|-- MistBall
+SpecialMove <|-- SludgeBomb
+SpecialMove <|-- Thunder
+
+StatusMove <|-- Agility
+StatusMove <|-- Confide
+StatusMove <|-- DoubleTeam
+StatusMove <|-- HealPulse 
+
+Move <|-- DamageMove
+Move <|-- StatusMove
+DamageMove <|-- PhysicalMove
+DamageMove <|-- SpecialMove
+
+Pokemon <|-- Latias
+Pokemon <|-- Sandyghast
+Pokemon <|-- Pichu
+Sandyghast <|-- Palossand
+Pichu <|-- Pikachu
+Pikachu <|-- Raichu
+@enduml
