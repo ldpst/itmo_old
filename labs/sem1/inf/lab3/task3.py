@@ -2,13 +2,16 @@ from re import findall
 
 
 def task(s):
-    s = findall(r"<meta name=\"daily_price\"[^>]*Bitcoin[^<]*?>", s)
-    res = "Цена не указана"
-    for t in s:
-        t1 = findall(r"₽(\d+([,.]\d+)*) RUB", t)
-        if len(t1) != 0:
-            res = t1[0][0]
-    return res
+    s = findall(
+        r"(<meta name=\"daily_price\" content=([^>]*Bitcoin[^<]*(₽(\d+([,.]\d+)*) RUB)[^<]*)?>)|(<meta name=\"daily_price\" content=([^>]*(₽(\d+([,.]\d+)*) RUB)[^>]*Bitcoin[^<]*)?>)",
+        s)
+    if len(s) == 0:
+        return "Цена не указана"
+    else:
+        if len(s[0][3]) == 0:
+            return s[0][8]
+        else:
+            return s[0][3]
 
 
 def test1():
@@ -44,10 +47,10 @@ def test4():
 
 
 def test5():
-    s = '<meta name="daily_volume" content="В суточным объемом торгов Bitcoin цена ₽2,56,4566.67 RUB."/> <meta name="daily_price" content="Мы обновляем нашу цену Bitcoin к RUB в режиме реального времени."/> <meta name="daily_price" content=" Цена Bitcoin сегодня составляет ₽456.1445 RUB."/><meta name="daily_price" content="Ethereum стоит на данный момент ₽229,590,78 RUB."/>'
+    s = '<meta name="daily_volume" content="В суточным объемом торгов Bitcoin цена ₽2,56,4566.67 RUB."/> <meta name="daily_price" content="Мы обновляем нашу цену Bitcoin к RUB в режиме реального времени."/> <meta name="daily_price" content="₽456.1445 RUB - именно столько сегодня стоит Bitcoin."/><meta name="daily_price" content="Ethereum стоит на данный момент ₽229,590,78 RUB."/>'
     print('\n=================test5=================')
     print(s)
-    print("ans = Цена не указана")
+    print("ans = 456.1445")
     print("res =", task(s))
 
 
