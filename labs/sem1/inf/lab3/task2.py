@@ -46,7 +46,6 @@ def test5():
 
 
 def test():
-    print("ans - ответ; res - результат выполнения программы")
     test1()
     test2()
     test3()
