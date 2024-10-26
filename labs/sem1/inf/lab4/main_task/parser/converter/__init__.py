@@ -13,4 +13,4 @@ def convert_to_xml(d: dict, tag="root"):
     if tag == "":
         return xml
     else:
-        return f"<{tag}>" + xml + f"</{tag}>"
+        return '<?xml version="1.0" encoding="UTF-8" ?>' + f"<{tag}>" + xml + f"</{tag}>"
