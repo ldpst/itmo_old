@@ -25,6 +25,14 @@ def parse_value(string: str):
     if not parsed_string is None:
         parse_value(parsed_string[1].strip())
         return parsed_string[0], parsed_string[1].strip()
+    parsed_bool = parse_bool(string)
+    if not parsed_bool is None:
+        parse_value(parsed_bool[1].strip())
+        return parsed_bool[0], parsed_bool[1].strip()
+    parsed_null = parse_null(string)
+    if not parsed_null is None:
+        parse_value(parsed_null[1].strip())
+        return parsed_null[0], parsed_null[1].strip()
     parsed_array = parse_array(string)
     if not parsed_array is None:
         parse_value(parsed_array[1].strip())
@@ -33,6 +41,18 @@ def parse_value(string: str):
     if not parsed_obect is None:
         parse_value(parsed_obect[1].strip())
         return parsed_obect[0], parsed_obect[1].strip()
+
+
+def parse_bool(string: str):
+    if string.startswith("true"):
+        return True, string[4:].strip()
+    if string.startswith("false"):
+        return False, string[5:].strip()
+
+
+def parse_null(string: str):
+    if string.startswith("null"):
+        return None, string[4:].strip()
 
 
 def parse_comma(string: str):

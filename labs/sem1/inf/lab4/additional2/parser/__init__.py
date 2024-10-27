@@ -1,3 +1,12 @@
+import re
+from re import compile
+
+string_regex = compile(r"(\"(?:[^\\\"]|\\[\"nfbtr])*?\")(\s*.*)", re.DOTALL)
+number_regex = compile(r"(-?(?:0|[1-9]\d*)(?:\.\d*)?(?:[eE][+-]?\d+)?)(\s*.*)", re.DOTALL)
+null_regex = compile(r"(null)\s*(.*)", re.DOTALL)
+bool_regex = compile(r"(true|false)\s*(.*)", re.DOTALL)
+
+
 def parse_json(json: str):
     string = parse_value(json.strip())[0]
     return string
@@ -25,6 +34,14 @@ def parse_value(string: str):
     if not parsed_string is None:
         parse_value(parsed_string[1].strip())
         return parsed_string[0], parsed_string[1].strip()
+    parsed_bool = parse_bool(string)
+    if not parsed_bool is None:
+        parse_value(parsed_bool[1].strip())
+        return parsed_bool[0], parsed_bool[1].strip()
+    parsed_null = parse_null(string)
+    if not parsed_null is None:
+        parse_value(parsed_null[1].strip())
+        return parsed_null[0], parsed_null[1].strip()
     parsed_array = parse_array(string)
     if not parsed_array is None:
         parse_value(parsed_array[1].strip())
@@ -33,6 +50,22 @@ def parse_value(string: str):
     if not parsed_obect is None:
         parse_value(parsed_obect[1].strip())
         return parsed_obect[0], parsed_obect[1].strip()
+
+
+def parse_bool(string: str):
+    bool_match = bool_regex.match(string.strip())
+    if not bool_match:
+        return None
+    res, string = bool_match.groups()
+    return res == 'true', string.strip()
+
+
+def parse_null(string: str):
+    null_match = null_regex.match(string.strip())
+    if not null_match:
+        return None
+    res, string = null_match.groups()
+    return 'null', string.strip()
 
 
 def parse_comma(string: str):
@@ -71,12 +104,11 @@ def parse_array(string: str):
 
 
 def parse_string(string: str):
-    if not string.startswith("\""):
+    string_match = string_regex.match(string.strip())
+    if not string_match:
         return None
-    second_quote = string.find("\"", 1)
-    if second_quote == -1:
-        return None
-    return string[1:second_quote], string[second_quote + 1:]
+    res, string = string_match.groups()
+    return res[1:-1], string.strip()
 
 
 def parse_colon(string: str):
@@ -113,16 +145,8 @@ def parse_object(string: str):
 
 
 def parse_number(string: str):
-    num = ""
-    for i in string:
-        if i in "0123456789.Ee-+":
-            num += i
-        else:
-            break
-    if num.isnumeric():
-        return int(num), string[len(num):].strip()
-    else:
-        try:
-            return float(num), string[len(num):].strip()
-        except ValueError:
-            return None
+    number_match = number_regex.match(string.strip())
+    if not number_match:
+        return None
+    res, string = number_match.groups()
+    return eval(res), string.strip()
